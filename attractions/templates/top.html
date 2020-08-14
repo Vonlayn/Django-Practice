@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load render_table from django_tables2 %}
+
+
+{% block content %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'top.css' %}">
+
+<div>
+    <img src="https://image.flaticon.com/icons/svg/744/744974.svg" alt="Top" class="center">
+    <center><h1>Рейтинг Достопримечательностей</h1></center>
+    <div class="container">
+        <middle class="text-muted">
+            В данной таблице вы можете посмотреть всю статистику хранящихся достопримечательностей.
+            Для фильтрации информации используйте оглавления столбцов.
+        </middle>
+    </div>
+</div>
+
+
+
+<body>
+{% render_table table %}
+</body>
+
+
+
+{% endblock %}
+
+

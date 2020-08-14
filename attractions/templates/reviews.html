@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class='imgblock'>
+<img src={{cur_attraction.image_url}} >
+<span>{{cur_attraction.name}}</span>
+</div>
+
+<hr align="center" width="500" size="8" color="black" />
+
+<div class='About'>
+    <h1>Описание</h1>
+<p> {{cur_attraction.info}}</p>
+
+</div>
+
+<div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'rating.css' %}">
+    <span class="heading">Средний рейтинг: {{middle_rating}} </span>
+    <p> Cредний рейтинг на базе {{cur_attraction.review_set.count}} отзывов.</p>
+    <hr style="border:3px solid #f1f1f1">
+
+    <div class="row">
+        <div class="side">
+            <div>5 звезд</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-5" style=" width: {{percentage.4 | default:0}}%"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div>{{ rating_count.4 | default:0}}</div>
+        </div>
+        <div class="side">
+            <div>4 звезды</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-4"  style=" width: {{percentage.3 | default:0}}%"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div>{{ rating_count.3|default:0}}</div>
+        </div>
+        <div class="side">
+            <div>3 звезды</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-3"  style=" width: {{percentage.2 | default:0}}%"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div>{{ rating_count.2|default:0}}</div>
+        </div>
+        <div class="side">
+            <div>2 звезды</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-2"  style=" width: {{percentage.1 | default:0}}%"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div>{{ rating_count.1|default:0}}</div>
+        </div>
+        <div class="side">
+            <div>1 звезда</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-1"  style=" width: {{percentage.0 | default:0}}%"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div>{{ rating_count.0|default:0}}</div>
+        </div>
+    </div>
+
+<hr align="center" width="500" size="4" color="black" />
+       <h1>Отзывы</h1>
+    </hr>
+
+{% for Review in reviews %}
+<review class="media content-section">
+    <img class="rounded-circle article-img" src="{{ Review.author.profile.image.url }}">
+    <div class="media-body">
+        <div class="review-metadata">
+            <a class="mr-2">{{ Review.author}}</a>
+            <small-1 class="text-muted">{{ Review.date|date:"d.m.y" }}</small-1>
+            {% if Review.author == user %}
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' Review.id %}">Изменить</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' Review.id %}">Удалить</a>
+            {% endif %}
+        </div>
+        <h2><a class="review-title">{{ Review.title }}</a></h2>
+        <p class="review-content">{{ Review.content }}</p>
+        <!-- Add icon library -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <repeat n="{{Review.rating}}"></repeat>
+        <rest n="{{ Review.rating|add:'-5'}}"></rest>
+
+    </div>
+</review>
+{% endfor %}
+
+
+    <div class="container">
+        <small class="text-muted">
+            {% if not is_rev_created %}
+            Хотите оставить отзыв? <a class="btn btn-primary" href="{% url 'review-create' id=attraction_id %}">Оставить отзыв</a>
+            {% endif %}
+        </small>
+    </div>
+</div>
+{% endblock %}

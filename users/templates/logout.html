@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Вы вышли из аккаунта</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Хотите авторизироваться снова? <a class="ml-2" href="{% url 'login' %}">Войти</a>
+            <a class="ml-2" href="{% url 'home' %}">На главную</a>
+        </small>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+  <link rel="stylesheet" type="text/css" href="{% static 'card.css' %}">
+
+<!-- Search form -->
+<div class="Search">
+ <form class="form-inline" method="GET">
+    <input class="form-control mr-sm-2"  name="q" type="search" placeholder="Что вы хотите найти?" aria-label="Search">
+    <button class="btn btn-primary my-2" type="submit">Поиск</button>
+  </form>
+</div>
+
+
+    <div class="row">
+        {% if attractions %}
+        {% for Attraction in attractions %}
+        <style>  img { width: 150px; height: 200px; object-fit: cover; }</style>
+        <div class="col-sm-6 col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ Attraction.image_url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ Attraction.name }}</h5>
+                    <p class="card-text">{{ Attraction.info }}</p>
+                    <a href="{{Attraction.id}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+          <span class="heading" style="font-size: 32px;"> Ничего нет :(</span>
+         {% endif %}
+    </div>
+{% endblock %}
