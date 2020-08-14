@@ -1,5 +1,5 @@
 # Django-Practice
-##Simple Django web-application
+## Simple Django web-application
 
 * Show attractions with description. 
 * Login/logout System.
@@ -7,5 +7,5 @@
 * Form rating based on reviews.
 * Language: RU
 
-Command to start locally: python manage.py runserver
+Command to start locally: python manage.py runserver  
 Start page address: http://127.0.0.1:8000/attractions/ 
