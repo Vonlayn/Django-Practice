@@ -3,7 +3,7 @@
 
 * Show attractions with description. 
 * Login/logout System.
-* Ability to add/change /delete text reviews through registered accounts.
+* Ability to add/change/delete text reviews through registered accounts.
 * Form rating based on reviews.
 * Language: RU
 
